@@ -52,6 +52,59 @@ html {
     border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--discord-primary-hover);
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--discord-primary-hover);
+    }
+
+.error-message {
+    background-color: var(--discord-red);
+    color: var(--discord-white);
+    padding: 10px;
+    border: 1px solid rgba(237, 66, 69, 0.3);
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    background-color: var(--discord-green);
+    color: var(--discord-white);
+    padding: 10px;
+    border: 1px solid rgba(87, 242, 135, 0.3);
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.unauthorized {
+    text-align: center;
+    padding: 50px;
+}
+
+/* Updated form-control to match Discord theme */
+.form-control {
+    width: 100%;
+    background: var(--discord-dark-input) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 4px;
+    padding: 12px;
+    color: var(--discord-white) !important;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.15s ease;
+    margin-bottom: 5px;
+}
+
+    .form-control:focus {
+        outline: none !important;
+        border-color: var(--discord-blurple) !important;
+        box-shadow: 0 0 0 1px var(--discord-blurple) !important;
+    }
+
+    .form-control::placeholder {
+        color: #72767d !important;
+    }
+
+.validation-message {
+    color: var(--discord-red);
+    font-size: 0.875em;
+    margin-top: 5px;
 }

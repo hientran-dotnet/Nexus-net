@@ -1,4 +1,4 @@
-﻿/* Discord-inspired Authentication Styles */
+﻿/* Discord-inspired Authentication Styles - Updated */
 
 * {
     margin: 0;
@@ -186,35 +186,52 @@ body {
     padding: 20px;
 }
 
-/* Auth Card */
+/* Auth Card - Enhanced */
 .auth-card {
     background: var(--discord-dark);
-    border-radius: 8px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     width: 100%;
-    max-width: 480px;
-    padding: 32px;
+    max-width: 500px;
+    padding: 40px;
     position: relative;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
-/* Logo */
+    .auth-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+
+/* Logo - Enhanced */
 .logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
     color: var(--discord-white);
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
 }
 
     .logo i {
         color: var(--discord-blurple);
         margin-right: 12px;
-        font-size: 28px;
+        font-size: 30px;
+        animation: pulse 2s infinite;
     }
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
 
 /* Form Container */
 .form-container {
@@ -223,22 +240,27 @@ body {
     transform: translateY(0);
 }
 
-/* Form Header */
+/* Form Header - Enhanced */
 .form-header {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 35px;
 }
 
     .form-header h1 {
         color: var(--discord-white);
-        font-size: 24px;
+        font-size: 28px;
         font-weight: 600;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, var(--discord-white), var(--discord-light-grey));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .form-header p {
         color: var(--discord-light-grey);
         font-size: 16px;
+        opacity: 0.8;
     }
 
 /* Form Styles */
@@ -247,83 +269,102 @@ body {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    position: relative;
 }
 
+/* Enhanced Labels */
 label {
     display: block;
     color: var(--discord-light-grey);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
 }
 
 .required {
     color: var(--discord-red);
+    margin-left: 2px;
 }
 
+/* Enhanced Input Fields */
 input[type="text"],
 input[type="email"],
-input[type="password"] {
-    width: 100%;
-    background: var(--discord-dark-input);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    padding: 12px;
-    color: var(--discord-white);
-    font-size: 16px;
-    font-family: inherit;
-    transition: border-color 0.15s ease;
+input[type="password"],
+.form-control {
+    width: 100% !important;
+    background: var(--discord-dark-input) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+    padding: 14px 16px !important;
+    color: var(--discord-white) !important;
+    font-size: 16px !important;
+    font-family: inherit !important;
+    transition: all 0.3s ease !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
     input[type="text"]:focus,
     input[type="email"]:focus,
-    input[type="password"]:focus {
-        outline: none;
-        border-color: var(--discord-blurple);
-        box-shadow: 0 0 0 1px var(--discord-blurple);
+    input[type="password"]:focus,
+    .form-control:focus {
+        outline: none !important;
+        border-color: var(--discord-blurple) !important;
+        box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+        transform: translateY(-1px);
     }
 
     input[type="text"]::placeholder,
     input[type="email"]::placeholder,
-    input[type="password"]::placeholder {
-        color: #72767d;
+    input[type="password"]::placeholder,
+    .form-control::placeholder {
+        color: #72767d !important;
+        opacity: 0.7;
     }
 
-/* Password Field */
+/* Enhanced Password Field */
 .password-field {
     position: relative;
 }
 
 .password-toggle {
     position: absolute;
-    right: 12px;
+    right: 16px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
     color: var(--discord-light-grey);
     cursor: pointer;
-    padding: 4px;
-    transition: color 0.15s ease;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    z-index: 2;
 }
 
     .password-toggle:hover {
         color: var(--discord-white);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .password-toggle i {
+        font-size: 16px;
     }
 
 /* Form Actions */
 .form-actions {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .forgot-password {
     color: var(--discord-blurple);
     text-decoration: none;
     font-size: 14px;
-    transition: color 0.15s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
     .forgot-password:hover {
@@ -331,108 +372,65 @@ input[type="password"] {
         text-decoration: underline;
     }
 
-/* Buttons */
+/* Enhanced Button */
 .btn-primary {
     width: 100%;
-    background: var(--discord-blurple);
+    background: linear-gradient(135deg, var(--discord-blurple), var(--discord-hover));
     color: var(--discord-white);
     border: none;
-    border-radius: 4px;
-    padding: 12px 24px;
+    border-radius: 8px;
+    padding: 16px 24px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.15s ease;
-    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
 }
 
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+        left: 100%;
+    }
+
     .btn-primary:hover {
-        background: var(--discord-hover);
+        background: linear-gradient(135deg, var(--discord-hover), #3C45A5);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
     }
 
     .btn-primary:active {
-        background: #3C45A5;
+        transform: translateY(0);
+        box-shadow: 0 2px 10px rgba(88, 101, 242, 0.3);
     }
 
-/* Divider */
-.divider {
-    display: flex;
-    align-items: center;
-    margin: 24px 0;
-    color: var(--discord-light-grey);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-    .divider::before,
-    .divider::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: rgba(255, 255, 255, 0.1);
+    .btn-primary:disabled {
+        background: #4f545c;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
     }
 
-    .divider span {
-        padding: 0 16px;
-    }
-
-/* QR Section */
-.qr-section {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 24px 0;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.qr-code {
-    flex-shrink: 0;
-}
-
-.qr-placeholder {
-    width: 80px;
-    height: 80px;
-    background: var(--discord-white);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--discord-dark);
-}
-
-    .qr-placeholder i {
-        font-size: 24px;
-        margin-bottom: 4px;
-    }
-
-    .qr-placeholder p {
-        font-size: 10px;
-        font-weight: 600;
-    }
-
-.qr-info h3 {
-    color: var(--discord-white);
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.qr-info p {
-    color: var(--discord-light-grey);
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-/* Checkbox */
+/* Enhanced Checkbox */
 .checkbox-group {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
+    margin-bottom: 30px;
 }
 
 .checkbox-label {
@@ -441,7 +439,7 @@ input[type="password"] {
     cursor: pointer;
     font-size: 14px;
     color: var(--discord-light-grey);
-    line-height: 1.4;
+    line-height: 1.5;
     text-transform: none;
     margin-bottom: 0;
 }
@@ -451,28 +449,30 @@ input[type="password"] {
     }
 
 .checkmark {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     background: var(--discord-dark-input);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    margin-right: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-right: 14px;
     margin-top: 2px;
     flex-shrink: 0;
     position: relative;
-    transition: all 0.15s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .checkbox-label input[type="checkbox"]:checked + .checkmark {
     background: var(--discord-blurple);
     border-color: var(--discord-blurple);
+    transform: scale(1.05);
 }
 
     .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
         content: '✓';
         position: absolute;
         color: var(--discord-white);
-        font-size: 12px;
+        font-size: 14px;
         font-weight: bold;
         top: 50%;
         left: 50%;
@@ -482,16 +482,21 @@ input[type="password"] {
 .checkbox-label a {
     color: var(--discord-blurple);
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
     .checkbox-label a:hover {
         text-decoration: underline;
+        color: var(--discord-hover);
     }
 
-/* Switch Form */
+/* Enhanced Switch Form */
 .switch-form {
     text-align: center;
-    margin-top: 24px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--discord-light-grey);
     font-size: 14px;
 }
@@ -500,7 +505,7 @@ input[type="password"] {
         color: var(--discord-blurple);
         text-decoration: none;
         font-weight: 600;
-        transition: color 0.15s ease;
+        transition: all 0.3s ease;
     }
 
         .switch-form a:hover {
@@ -508,58 +513,113 @@ input[type="password"] {
             text-decoration: underline;
         }
 
-/* Responsive Design */
+/* Error and Success Messages */
+.error-message {
+    background: rgba(237, 66, 69, 0.1);
+    border: 1px solid rgba(237, 66, 69, 0.3);
+    color: var(--discord-red);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.success-message {
+    background: rgba(87, 242, 135, 0.1);
+    border: 1px solid rgba(87, 242, 135, 0.3);
+    color: var(--discord-green);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Validation Messages */
+.validation-message {
+    color: var(--discord-red);
+    font-size: 12px;
+    margin-top: 6px;
+    margin-left: 4px;
+    font-weight: 500;
+}
+
+/* Enhanced Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 16px;
     }
 
     .auth-card {
-        padding: 24px;
+        padding: 30px 24px;
         margin: 0;
-    }
-
-    .qr-section {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .qr-info {
-        margin-top: 12px;
+        border-radius: 8px;
     }
 
     .form-header h1 {
-        font-size: 20px;
+        font-size: 24px;
     }
 
     .logo {
-        font-size: 20px;
+        font-size: 22px;
+        margin-bottom: 30px;
     }
 
         .logo i {
-            font-size: 24px;
+            font-size: 26px;
         }
 }
 
 @media (max-width: 480px) {
     .auth-card {
-        padding: 20px;
+        padding: 24px 20px;
     }
 
     .form-header {
-        margin-bottom: 24px;
+        margin-bottom: 25px;
     }
+
+        .form-header h1 {
+            font-size: 22px;
+        }
 
     .checkbox-label {
         font-size: 13px;
     }
 
-    .qr-placeholder {
-        width: 60px;
-        height: 60px;
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    .form-control {
+        padding: 12px 14px !important;
+        font-size: 15px !important;
     }
 
-        .qr-placeholder i {
-            font-size: 20px;
-        }
+    .btn-primary {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+/* Loading State */
+.btn-primary:disabled {
+    background: #4f545c !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+    .btn-primary:disabled::before {
+        display: none;
+    }
+
+/* Focus improvements for accessibility */
+.form-group:focus-within label {
+    color: var(--discord-blurple);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }

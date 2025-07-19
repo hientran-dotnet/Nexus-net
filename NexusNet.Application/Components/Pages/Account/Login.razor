@@ -1,0 +1,186 @@
+﻿@page "/Login"
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using System.Security.Claims
+@using NexusNet.Application.Models.ViewModels
+@using NexusNet.Application.Services
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@inject IHttpContextAccessor HttpContextAccessor
+
+<title>Nexus Net - Login</title>
+
+<!-- Animated Background -->
+<div class="background">
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+        <div class="shape shape-6"></div>
+    </div>
+    <div class="sparkles">
+        <div class="sparkle sparkle-1"></div>
+        <div class="sparkle sparkle-2"></div>
+        <div class="sparkle sparkle-3"></div>
+        <div class="sparkle sparkle-4"></div>
+        <div class="sparkle sparkle-5"></div>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <div class="auth-card">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="https://imgbb.com/">
+                <img style="
+                     height: 100px;
+                     margin: 0px 15px -10px 0;"
+                     src="https://i.ibb.co/Z1zD8vP9/Chat-GPT-Image-Jul-19-2025-01-51-38-PM-removebg-preview.png"
+                     alt="Chat-GPT-Image-Jul-19-2025-01-51-38-PM-removebg-preview" border="0">
+            </a>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Welcome back!</h1>
+                <p>We're so excited to see you again!</p>
+            </div>
+
+            <EditForm Model="Model" OnValidSubmit="HandleLogin" FormName="LoginForm">
+                <DataAnnotationsValidator />
+
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="error-message">@errorMessage</div>
+                }
+
+                <div class="form-group">
+                    <label for="login-username">Username <span class="required">*</span></label>
+                    <InputText @bind-Value="Model.UserName" id="login-username" class="form-control" />
+                    <ValidationMessage For="() => Model.UserName" />
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password <span class="required">*</span></label>
+                    <div class="password-field">
+                        <input type="@passwordInputType" @bind="Model.Password" id="login-password" class="form-control" />
+                        <button type="button" class="password-toggle" @onclick="TogglePasswordVisibility">
+                            <i class="fas @passwordIcon"></i>
+                        </button>
+                    </div>
+                    <ValidationMessage For="() => Model.Password" />
+                </div>
+
+                <div class="form-actions">
+                    <a href="#" class="forgot-password">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary" disabled="@isLoading">
+                    @if (isLoading)
+                    {
+                        <span>Signing in...</span>
+                    }
+                    else
+                    {
+                        <span>Log In</span>
+                    }
+                </button>
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <div class="switch-form">
+                    <span>Need an account? </span>
+                    <a href="Register">Register</a>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    public LoginViewModel Model { get; set; } = new();
+
+    private string? errorMessage;
+    private bool isLoading = false;
+
+    private string passwordInputType = "password";
+    private string passwordIcon = "fa-eye";
+
+    private void TogglePasswordVisibility()
+    {
+        passwordInputType = passwordInputType == "password" ? "text" : "password";
+        passwordIcon = passwordIcon == "fa-eye" ? "fa-eye-slash" : "fa-eye";
+    }
+
+    private async Task HandleLogin()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            if (string.IsNullOrEmpty(Model.UserName) || string.IsNullOrEmpty(Model.Password))
+            {
+                errorMessage = "Please enter both username and password.";
+                return;
+            }
+
+            var user = await AuthService.ValidateUserAsync(Model.UserName, Model.Password);
+
+            if (user != null)
+            {
+                await SignInUser(user);
+                Navigation.NavigateTo("/", true);
+            }
+            else
+            {
+                errorMessage = "Invalid username or password.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "An error occurred during login. Please try again.";
+            Console.WriteLine($"Login error: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task SignInUser(NexusNet.Application.Models.Entities.Account user)
+    {
+        var httpContext = HttpContextAccessor.HttpContext;
+        if (httpContext == null) return;
+
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.UserName ?? ""),
+            new Claim(ClaimTypes.Email, user.Email ?? ""),
+            new Claim(ClaimTypes.Role, user.Role ?? "User"),
+            new Claim("DisplayName", user.DisplayName ?? user.UserName ?? "")
+        };
+
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+        await httpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            claimsPrincipal,
+            new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60)
+            });
+    }
+}

@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@attribute [Authorize]
+@inject NavigationManager Navigation
+
+@if (isAuthorized)
+{
+    @ChildContent
+}
+else
+{
+    <div class="unauthorized">
+        <h3>Access Denied</h3>
+        <p>You need to be logged in to access this page.</p>
+        <a href="/Login" class="btn btn-primary">Login</a>
+    </div>
+}
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [CascadingParameter] private Task<AuthenticationState>? AuthenticationStateTask { get; set; }
+
+    private bool isAuthorized = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthenticationStateTask != null)
+        {
+            var authState = await AuthenticationStateTask;
+            isAuthorized = authState.User.Identity?.IsAuthenticated ?? false;
+
+            if (!isAuthorized)
+            {
+                Navigation.NavigateTo("/Login");
+            }
+        }
+    }
+}

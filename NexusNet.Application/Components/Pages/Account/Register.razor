@@ -1,0 +1,175 @@
+﻿@page "/Register"
+@using NexusNet.Application.Models.ViewModels
+@using NexusNet.Application.Services
+@inject IAuthService AuthService
+@inject NavigationManager Navigation
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<title>Nexus Net - Register</title>
+
+<!-- Animated Background -->
+<div class="background">
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+        <div class="shape shape-6"></div>
+    </div>
+    <div class="sparkles">
+        <div class="sparkle sparkle-1"></div>
+        <div class="sparkle sparkle-2"></div>
+        <div class="sparkle sparkle-3"></div>
+        <div class="sparkle sparkle-4"></div>
+        <div class="sparkle sparkle-5"></div>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <div class="auth-card">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="https://imgbb.com/"><img 
+                style="
+                     height: 100px;
+                     margin: 0px 15px -10px 0;"
+                src="https://i.ibb.co/Z1zD8vP9/Chat-GPT-Image-Jul-19-2025-01-51-38-PM-removebg-preview.png" 
+                alt="Chat-GPT-Image-Jul-19-2025-01-51-38-PM-removebg-preview" border="0"></a>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Create an account</h1>
+            </div>
+
+            <EditForm Model="Model" OnValidSubmit="HandleRegister">
+                <DataAnnotationsValidator />
+
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="error-message">@errorMessage</div>
+                }
+
+                @if (!string.IsNullOrEmpty(successMessage))
+                {
+                    <div class="success-message">@successMessage</div>
+                }
+
+                <div class="form-group">
+                    <label for="register-email">Email <span class="required">*</span></label>
+                    <InputText @bind-Value="Model.Email" id="register-email" class="form-control" />
+                    <ValidationMessage For="@(() => Model.Email)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="register-username">Username <span class="required">*</span></label>
+                    <InputText @bind-Value="Model.Username" id="register-username" class="form-control" />
+                    <ValidationMessage For="@(() => Model.Username)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password">Password <span class="required">*</span></label>
+                    <div class="password-field">
+                        <input type="@passwordInputType" @bind="Model.Password" id="register-password" class="form-control" />
+                        <button type="button" class="password-toggle" @onclick="@(() => TogglePasswordVisibility("password"))">
+                            <i class="fas @passwordIcon"></i>
+                        </button>
+                    </div>
+                    <ValidationMessage For="@(() => Model.Password)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password <span class="required">*</span></label>
+                    <div class="password-field">
+                        <input type="@confirmPasswordInputType" @bind="Model.ConfirmPassword" id="confirm-password" class="form-control" />
+                        <button type="button" class="password-toggle" @onclick="@(() => TogglePasswordVisibility("confirm"))">
+                            <i class="fas @confirmPasswordIcon"></i>
+                        </button>
+                    </div>
+                    <ValidationMessage For="@(() => Model.ConfirmPassword)" />
+                </div>
+
+                <button type="submit" class="btn-primary" disabled="@isLoading">
+                    @if (isLoading)
+                    {
+                        <span>Creating account...</span>
+                    }
+                    else
+                    {
+                        <span>Continue</span>
+                    }
+                </button>
+
+                <div class="switch-form">
+                    <a href="Login">Already have an account?</a>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    private RegisterViewModel Model { get; set; } = new();
+
+    private string? errorMessage;
+    private string? successMessage;
+    private bool isLoading = false;
+
+    private string passwordInputType = "password";
+    private string confirmPasswordInputType = "password";
+    private string passwordIcon = "fa-eye";
+    private string confirmPasswordIcon = "fa-eye";
+
+    private void TogglePasswordVisibility(string field)
+    {
+        if (field == "password")
+        {
+            passwordInputType = passwordInputType == "password" ? "text" : "password";
+            passwordIcon = passwordIcon == "fa-eye" ? "fa-eye-slash" : "fa-eye";
+        }
+        else if (field == "confirm")
+        {
+            confirmPasswordInputType = confirmPasswordInputType == "password" ? "text" : "password";
+            confirmPasswordIcon = confirmPasswordIcon == "fa-eye" ? "fa-eye-slash" : "fa-eye";
+        }
+    }
+
+    private async Task HandleRegister()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            successMessage = null;
+            StateHasChanged();
+
+            var result = await AuthService.RegisterUserAsync(Model);
+
+            if (result != null)
+            {
+                successMessage = "Account created successfully! Redirecting to login...";
+                StateHasChanged();
+
+                await Task.Delay(2000); // Show success message for 2 seconds
+                Navigation.NavigateTo("/Login");
+            }
+            else
+            {
+                errorMessage = "Username or email already exists. Please try different credentials.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "An error occurred during registration. Please try again.";
+            Console.WriteLine($"Registration error: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+}
