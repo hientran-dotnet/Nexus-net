@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - Login</title>
+    <link rel="stylesheet" href="auth-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Whitney:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+            <div class="shape shape-6"></div>
+        </div>
+        <div class="sparkles">
+            <div class="sparkle sparkle-1"></div>
+            <div class="sparkle sparkle-2"></div>
+            <div class="sparkle sparkle-3"></div>
+            <div class="sparkle sparkle-4"></div>
+            <div class="sparkle sparkle-5"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="auth-card">
+            <!-- Logo -->
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>GameHub</span>
+            </div>
+
+            <!-- Login Form -->
+            <div class="form-container">
+                <div class="form-header">
+                    <h1>Welcome back!</h1>
+                    <p>We're so excited to see you again!</p>
+                </div>
+
+                <form class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email or Phone Number <span class="required">*</span></label>
+                        <input type="text" id="login-email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password <span class="required">*</span></label>
+                        <div class="password-field">
+                            <input type="password" id="login-password" name="password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('login-password')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="#" class="forgot-password">Forgot your password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Log In</button>
+
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+
+                    <div class="qr-section">
+                        <div class="qr-code">
+                            <div class="qr-placeholder">
+                                <i class="fas fa-qrcode"></i>
+                                <p>QR Code</p>
+                            </div>
+                        </div>
+                        <div class="qr-info">
+                            <h3>Log in with QR Code</h3>
+                            <p>Scan this with the <strong>GameHub mobile app</strong> to log in instantly.</p>
+                        </div>
+                    </div>
+
+                    <div class="switch-form">
+                        <span>Need an account? </span>
+                        <a href="register-page.html">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password visibility toggle
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = passwordInput.nextElementSibling;
+            const icon = toggleButton.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Form validation
+        document.querySelector('.auth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your login logic here
+            console.log('Login form submitted');
+        });
+
+        // Animate shapes
+        function animateShapes() {
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                const duration = 15000 + (index * 2000);
+                shape.style.animationDuration = duration + 'ms';
+            });
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            animateShapes();
+        });
+    </script>
+</body>
+</html>
