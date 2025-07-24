@@ -1,8 +1,13 @@
 ﻿using NexusNet.Repositories.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NexusNet.Repositories.Interface.Users
+namespace NexusNet.Services.Interface.Users
 {
-    public interface IUserRepository
+    public interface IUserService
     {
         Task<bool> AddUserAsync(User user);
         Task UpdateUserAsync(User user);

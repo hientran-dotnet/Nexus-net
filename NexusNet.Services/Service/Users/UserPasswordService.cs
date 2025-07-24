@@ -19,6 +19,10 @@ namespace NexusNet.Services.Service.Users
 
         public async Task<string> HashPasswordAsync(string password)
         {
+            // Validate input first
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentException("Password cannot be null or empty", nameof(password));
+
             return await Task.Run(() =>
             {
                 var salt = new byte[SaltSize];
@@ -44,6 +48,39 @@ namespace NexusNet.Services.Service.Users
                 return Convert.ToBase64String(hashBytes);
             });
         }
+
+        //public string HashPassword(string password)
+        //{
+        //    // Validate input
+        //    if (string.IsNullOrEmpty(password))
+        //        throw new ArgumentException("Password cannot be null or empty", nameof(password));
+
+        //    // Generate salt
+        //    byte[] salt = new byte[16];
+        //    using (var rng = RandomNumberGenerator.Create())
+        //    {
+        //        rng.GetBytes(salt);
+        //    }
+
+        //    // Create Argon2id with proper parameters
+        //    using var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
+        //    {
+        //        Salt = salt,
+        //        DegreeOfParallelism = 8,    // Số thread song song
+        //        Iterations = 4,             // Số lần lặp
+        //        MemorySize = 1024 * 128     // 128 MB memory
+        //    };
+
+        //    // Generate hash
+        //    byte[] hash = argon2.GetBytes(32); // 32 bytes hash
+
+        //    // Combine salt + hash for storage
+        //    byte[] result = new byte[salt.Length + hash.Length];
+        //    Buffer.BlockCopy(salt, 0, result, 0, salt.Length);
+        //    Buffer.BlockCopy(hash, 0, result, salt.Length, hash.Length);
+
+        //    return Convert.ToBase64String(result);
+        //}
         public async Task<bool> VerifyPasswordAsync(string password, string StoredPassword)
         {
             return await Task.Run(() =>

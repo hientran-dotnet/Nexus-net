@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NexusNet.Repositories.Entities;
 using NexusNet.Repositories.Interface.Users;
 
@@ -10,9 +11,27 @@ namespace NexusNet.Repositories.Repository.Users
 {
     public class UserRepository : IUserRepository
     {
-        public Task AddUserAsync(User user)
+        private readonly NexusNetAdminSourceDbContext _context;
+
+        public UserRepository(NexusNetAdminSourceDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task<bool> AddUserAsync(User user)
+        {
+            try
+            {
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+                Console.WriteLine("Add user successfully.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Add user failed.");
+                return false; 
+            }
         }
 
         public Task DeleteUserAsync(int userId)
@@ -20,9 +39,10 @@ namespace NexusNet.Repositories.Repository.Users
             throw new NotImplementedException();
         }
 
-        public Task<bool> EmailExistsAsync(string email)
+        public async Task<bool> EmailExistsAsync(string email)
         {
-            throw new NotImplementedException();
+            return await _context.Users
+                .AnyAsync(u => u.Email.ToLower() == email.ToLower());
         }
 
         public Task UpdateUserAsync(User user)
@@ -35,9 +55,10 @@ namespace NexusNet.Repositories.Repository.Users
             throw new NotImplementedException();
         }
 
-        public Task<bool> UsernameExistsAsync(string username)
+        public async Task<bool> UsernameExistsAsync(string username)
         {
-            throw new NotImplementedException();
+            return await _context.Users
+                .AnyAsync(u => u.Username.ToLower() == username.ToLower());
         }
     }
 }

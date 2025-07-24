@@ -1,0 +1,112 @@
+﻿@page "/register"
+@using NexusNet.Repositories.ViewModels
+@using NexusNet.Services.Interface.Users
+@using NexusNet.Services.Service
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+
+@rendermode InteractiveServer
+
+@inject IUserService UserService
+@inject IAuthenticationUserService AuthenticationUserService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Register - Discord Style</PageTitle>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Create an account</h1>
+        <p class="auth-subtitle">We're so excited to see you again!</p>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="error-message">
+                @errorMessage
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(successMessage))
+        {
+            <div class="success-message">
+                @successMessage
+            </div>
+        }
+
+        <EditForm Model="@registerModel" OnValidSubmit="@HandleRegister" FormName="RegisterForm">
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <InputText id="email" class="form-input" placeholder="Enter your email" @bind-Value="registerModel.Email"/>
+                <ValidationMessage For="@(() => registerModel.Email)" class="field-error" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <InputText id="username" class="form-input" placeholder="Enter your username" @bind-Value="registerModel.Username" />
+                <ValidationMessage For="@(() => registerModel.Username)" class="field-error" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <InputText id="password" type="password" class="form-input" placeholder="Enter your password" @bind-Value="registerModel.Password" />
+                <ValidationMessage For="@(() => registerModel.Password)" class="field-error" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                <InputText id="confirmPassword" type="password" class="form-input" placeholder="Confirm your password" @bind-Value="registerModel.ConfirmPassword" />
+                <ValidationMessage For="@(() => registerModel.ConfirmPassword)" class="field-error" />
+            </div>
+
+            <button type="submit" class="btn-primary" disabled="@isLoading">
+                @if (isLoading)
+                {
+                    <span class="spinner"></span>
+                }
+                Continue
+            </button>
+        </EditForm>
+
+        <div class="auth-switch">
+            <a href="/login" class="btn-secondary">Already have an account?</a>
+        </div>
+    </div>
+</div>
+
+@code {
+    private RegisterViewModel registerModel = new();
+    private string errorMessage = String.Empty;
+    private string successMessage = String.Empty;
+    private bool isLoading = false;
+
+    private async Task HandleRegister()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+        try
+        {
+            var result = await AuthenticationUserService.RegisterAsync(registerModel);
+            if (result.Item1) // Đây là cách đúng để truy cập tuple
+            {
+                successMessage = "Registration successful! Redirecting to login...";
+                await Task.Delay(2000);
+                NavigationManager.NavigateTo("/login");
+            }
+            else
+            {
+                errorMessage = result.Item2;
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An unexpected error occurred: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}
