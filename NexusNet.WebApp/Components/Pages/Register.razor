@@ -88,6 +88,18 @@
         successMessage = string.Empty;
         try
         {
+            if (await UserService.EmailExistsAsync(registerModel.Email))
+            {
+                errorMessage = "Email already exists. Please use a different email.";
+                return;
+            }
+
+            if (await UserService.UsernameExistsAsync(registerModel.Username))
+            {
+                errorMessage = "Username already exists. Please choose a different username.";
+                return;
+            }
+
             var result = await AuthenticationUserService.RegisterAsync(registerModel);
             if (result.Item1) // Đây là cách đúng để truy cập tuple
             {
