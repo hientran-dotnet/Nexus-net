@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36202.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientApp", "ClientApp", "{CE0634F8-2258-4075-B422-0868B3414355}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerApp", "ServerApp", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NexusNetChat.Client", "NexusNetChat.Client\NexusNetChat.Client.csproj", "{8A225790-B896-4681-836C-7E2ACD53098D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NexusNetChat.Server", "NexusNetChat.Server\NexusNetChat.Server.csproj", "{ADDFAF61-0804-47CE-B4EB-8F1D2E8F6CEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFramework", "EntityFramework\EntityFramework.csproj", "{02154BEE-F588-4116-9A62-D9979E89723C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A225790-B896-4681-836C-7E2ACD53098D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A225790-B896-4681-836C-7E2ACD53098D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A225790-B896-4681-836C-7E2ACD53098D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A225790-B896-4681-836C-7E2ACD53098D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDFAF61-0804-47CE-B4EB-8F1D2E8F6CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDFAF61-0804-47CE-B4EB-8F1D2E8F6CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDFAF61-0804-47CE-B4EB-8F1D2E8F6CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDFAF61-0804-47CE-B4EB-8F1D2E8F6CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02154BEE-F588-4116-9A62-D9979E89723C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02154BEE-F588-4116-9A62-D9979E89723C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02154BEE-F588-4116-9A62-D9979E89723C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02154BEE-F588-4116-9A62-D9979E89723C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A225790-B896-4681-836C-7E2ACD53098D} = {CE0634F8-2258-4075-B422-0868B3414355}
+		{ADDFAF61-0804-47CE-B4EB-8F1D2E8F6CEC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{02154BEE-F588-4116-9A62-D9979E89723C} = {CE0634F8-2258-4075-B422-0868B3414355}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9121AE08-08A9-43D6-B75B-F3ACF836CEBE}
+	EndGlobalSection
+EndGlobal
