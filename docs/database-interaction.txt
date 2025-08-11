@@ -1,0 +1,13 @@
+# Cài đặt các package cần thiết từ EntityFramework
+
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.10
+dotnet add package Microsoft.EntityFrameworkCore --version 8.0.10
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.10
+
+
+# Cào dữ liệu từ database 
+
+dotnet ef dbcontext scaffold "Data Source=.\HIENTM0978SQLSV;Initial Catalog=NexusNetChat;Integrated Security=True;Trust Server Certificate=True" Microsoft.EntityFrameworkCore.SqlServer --output-dir Entities --no-build
+ 
+
+
