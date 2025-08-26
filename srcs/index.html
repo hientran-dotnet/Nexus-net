@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaFlex - Movie Ticket Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-film text-3xl text-purple-600 mr-2"></i>
+                    <span class="text-2xl font-bold text-gray-800">CinemaFlex</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="pages/login.html" id="loginBtn" class="text-gray-700 hover:text-purple-600 px-3 py-2 rounded-md font-medium">
+                        <i class="fas fa-sign-in-alt mr-1"></i>Login
+                    </a>
+                    <a href="pages/register.html" id="registerBtn" class="gradient-bg text-white px-4 py-2 rounded-lg hover:opacity-90 transition font-medium">
+                        Register
+                    </a>
+                    <div id="userProfile" class="hidden flex items-center space-x-2">
+                        <i class="fas fa-user-circle text-2xl text-gray-600"></i>
+                        <span id="userName" class="text-gray-700 font-medium"></span>
+                        <button id="logoutBtn" class="text-red-600 hover:text-red-800 ml-2">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">Experience Movies Like Never Before</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">Book your tickets now and enjoy the best cinematic experience</p>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition">
+                <i class="fas fa-ticket-alt mr-2"></i>Book Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Movies Section -->
+    <div class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Now Showing</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="moviesGrid">
+                <!-- Movies will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/movies.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

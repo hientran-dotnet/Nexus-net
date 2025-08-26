@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - CinemaFlex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="../index.html" class="flex items-center">
+                    <i class="fas fa-film text-3xl text-purple-600 mr-2"></i>
+                    <span class="text-2xl font-bold text-gray-800">CinemaFlex</span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <div id="userProfile" class="hidden flex items-center space-x-2">
+                        <i class="fas fa-user-circle text-2xl text-gray-600"></i>
+                        <span id="userName" class="text-gray-700 font-medium"></span>
+                        <button id="logoutBtn" class="text-red-600 hover:text-red-800 ml-2">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Movie Detail Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <a href="../index.html" class="text-purple-600 hover:text-purple-800 mb-6 flex items-center">
+            <i class="fas fa-arrow-left mr-2"></i>Back to Movies
+        </a>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+                <img id="detailPoster" class="w-full rounded-lg shadow-lg" alt="Movie Poster">
+            </div>
+            <div class="space-y-6">
+                <h1 id="detailTitle" class="text-4xl font-bold text-gray-800"></h1>
+                <p id="detailDescription" class="text-gray-600 text-lg"></p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <span class="font-semibold text-gray-700">Genre:</span>
+                        <p id="detailGenre" class="text-gray-600"></p>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-gray-700">Duration:</span>
+                        <p id="detailDuration" class="text-gray-600"></p>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-gray-700">Rating:</span>
+                        <p id="detailRating" class="text-gray-600"></p>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-gray-700">Release Date:</span>
+                        <p id="detailReleaseDate" class="text-gray-600"></p>
+                    </div>
+                </div>
+                <button id="bookTicketBtn" class="gradient-bg text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition">
+                    <i class="fas fa-ticket-alt mr-2"></i>Book Ticket
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/movies.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Load movie details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieId = parseInt(urlParams.get('id'));
+        
+        if (movieId) {
+            const movie = movies.find(m => m.id === movieId);
+            if (movie) {
+                document.getElementById('detailTitle').textContent = movie.title;
+                document.getElementById('detailPoster').src = movie.poster;
+                document.getElementById('detailDescription').textContent = movie.description;
+                document.getElementById('detailGenre').textContent = movie.genre;
+                document.getElementById('detailDuration').textContent = movie.duration;
+                document.getElementById('detailRating').textContent = movie.rating;
+                document.getElementById('detailReleaseDate').textContent = movie.releaseDate;
+                
+                document.getElementById('bookTicketBtn').onclick = function() {
+                    if (!isLoggedIn()) {
+                        alert('Please login to book tickets!');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    window.location.href = `booking.html?id=${movieId}`;
+                };
+            }
+        }
+        
+        // Update user interface
+        updateUserInterface();
+    </script>
+</body>
+</html>
