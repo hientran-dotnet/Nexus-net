@@ -34,7 +34,7 @@
 					<li>: Commando 3</li>
 					<li>: April 12, 22:00</li>
 					<li>: <span id="counter">0</span></li>
-					<li>: <b><i>RS.</i><span id="total">0</span></b></li>
+					<li>: <b><span id="total">0</span><i> VNĐ</i></b></li>
 				</ul>
 				<div class="clear"></div>
 				<ul id="selected-seats" class="scrollbar scrollbar1"></ul>
@@ -44,7 +44,7 @@
 			</div>
 
 			<script type="text/javascript">
-				var price = 110; //price
+				var price = 80; //price
 				$(document).ready(function () {
 					var $cart = $('#selected-seats'), //Sitting Area
 						$counter = $('#counter'), //Votes
@@ -79,25 +79,27 @@
 						},
 						click: function () { //Click event
 							if (this.status() == 'available') { //optional seat
-								$('<li>R-' + (this.settings.row + 1) + '	S-' + this.settings.label + '</li>')
+								$('<li>R-' + (this.settings.row + 1) + '\tS-' + this.settings.label + '</li>')
 									.attr('id', 'cart-item-' + this.settings.id)
 									.data('seatId', this.settings.id)
 									.appendTo($cart);
 
-								$counter.text(sc.find('selected').length + 1);
-								$total.text(recalculateTotal(sc) + price);
-
-								return 'selected';
+								// Đánh dấu ghế là selected trước, sau đó cập nhật số lượng và tổng tiền
+								var result = 'selected';
+								setTimeout(function() {
+									$counter.text(sc.find('selected').length);
+									$total.text(recalculateTotal(sc));
+								}, 0);
+								return result;
 							} else if (this.status() == 'selected') { //Checked
-								//Update Number
-								$counter.text(sc.find('selected').length - 1);
-								//update totalnum
-								$total.text(recalculateTotal(sc) - price);
-
 								//Delete reservation
 								$('#cart-item-' + this.settings.id).remove();
-								//optional
-								return 'available';
+								var result = 'available';
+								setTimeout(function() {
+									$counter.text(sc.find('selected').length);
+									$total.text(recalculateTotal(sc));
+								}, 0);
+								return result;
 							} else if (this.status() == 'unavailable') { //sold
 								return 'unavailable';
 							} else {
@@ -113,11 +115,18 @@
 				//sum total money
 				function recalculateTotal(sc) {
 					var total = 0;
+					var selectedSeats = sc.find('selected').length;
 					sc.find('selected').each(function () {
 						total += price;
 					});
-
-					return total;
+					 if(total > 1000)
+					{
+						return total/1000 + " triệu";
+					}
+					else 
+					{
+						return total + "k";
+					}
 				}
 			</script>
 		</div>
