@@ -4,8 +4,8 @@
 
 // Thông tin kết nối
 $db_host = "localhost"; 
-$db_user = "iovnwfbo_laptrinhmang";
-$db_pass = "z4Uw72s6uJFTSr4mguNk";
+$db_user = "iovnwfbo_thienle";
+$db_pass = "tjDyDE7s67WAye8GAk8M";
 $db_name = "iovnwfbo_datvephim";
 
 // Tạo kết nối

@@ -19687,3 +19687,8 @@ button.closebtn {
   }
 }
 /* Loading ends */
+
+.movie-card figure { aspect-ratio: 2/3; overflow: hidden; }
+.movie-card figure img { width: 100%; height: 100%; object-fit: cover; }
+.movie-card .title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
