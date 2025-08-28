@@ -78,3 +78,27 @@
   loadMore();
   btnMore.addEventListener('click', loadMore);
 })();
+
+function card(movie){
+  const title  = esc(movie.title || '');
+  const mins   = movie.duration_min ? `${movie.duration_min} phút` : '—';
+  const slug   = encodeURIComponent(movie.slug || movie.id);
+  const poster = resolveUrl(movie.poster_url || movie.backdrop_url || '/frontend/assets/images/placeholder-poster.jpg');
+  const badge  = movie.status === 'now_showing'
+    ? '<span class="badge badge-green">Đang chiếu</span>'
+    : (movie.status === 'coming_soon' ? '<span class="badge">Sắp chiếu</span>' : '');
+
+  return `
+    <div class="col col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+      <a class="movie-card" href="movie-detail.html?slug=${slug}">
+        <div class="poster">
+          ${badge}
+          <img loading="lazy" src="${poster}" alt="${title}">
+        </div>
+        <div class="meta">
+          <div class="title" title="${title}">${title}</div>
+          <div class="duration"><span class="fa fa-clock-o"></span> ${mins}</div>
+        </div>
+      </a>
+    </div>`;
+}
