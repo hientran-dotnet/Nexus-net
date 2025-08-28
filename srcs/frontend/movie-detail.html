@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Chi tiết phim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/style-starter.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <style>
+    .movie-hero { padding: 40px 0 20px; }
+    .movie-hero .poster { width:100%; aspect-ratio:2/3; overflow:hidden; border-radius:16px; background:#111; }
+    .movie-hero .poster img { width:100%; height:100%; object-fit:cover; display:block; }
+    .showtime-chip{ display:inline-block; margin:.35rem .35rem 0 0; padding:.4rem .65rem; border-radius:999px;
+      background:#1f2937; color:#fff; font-size:.9rem; transition:background .2s; }
+    .showtime-chip:hover{ background:#334155; text-decoration:none; }
+    .day-tab button{ margin-right:.5rem; margin-bottom:.5rem; }
+  </style>
+</head>
+<body>
+<header id="site-header" class="w3l-header fixed-top"> ... header hiện có ... </header>
+
+<section class="movie-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="poster"><img id="mv-poster" alt=""></div>
+      </div>
+      <div class="col-md-8">
+        <h2 id="mv-title" class="hny-title mb-2">...</h2>
+        <p id="mv-meta" class="mb-2 text-muted">...</p>
+        <p id="mv-desc" class="mb-3">...</p>
+        <div id="mv-trailer" class="mb-3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="w3l-grids">
+  <div class="grids-main pb-5">
+    <div class="container">
+      <h3 class="hny-title mb-3">Chọn suất chiếu</h3>
+      <div id="date-tabs" class="day-tab mb-3"></div>
+      <div id="showtime-list"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="w3l-footer"> ... footer hiện có ... </footer>
+
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/movies/detail-page.js"></script>
+</body>
+</html>
