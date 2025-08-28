@@ -6,49 +6,565 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/style-starter.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
   <style>
-    .movie-hero { padding: 40px 0 20px; }
-    .movie-hero .poster { width:100%; aspect-ratio:2/3; overflow:hidden; border-radius:16px; background:#111; }
-    .movie-hero .poster img { width:100%; height:100%; object-fit:cover; display:block; }
-    .showtime-chip{ display:inline-block; margin:.35rem .35rem 0 0; padding:.4rem .65rem; border-radius:999px;
-      background:#1f2937; color:#fff; font-size:.9rem; transition:background .2s; }
-    .showtime-chip:hover{ background:#334155; text-decoration:none; }
-    .day-tab button{ margin-right:.5rem; margin-bottom:.5rem; }
+    /* Enhanced Movie Hero Section */
+    .movie-hero { 
+      padding: 60px 0 40px; 
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .movie-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.03"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.1;
+    }
+    
+    .movie-hero .container { position: relative; z-index: 2; }
+    
+    .movie-hero .poster { 
+      width: 100%; 
+      aspect-ratio: 2/3; 
+      overflow: hidden; 
+      border-radius: 20px; 
+      background: #111;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    .movie-hero .poster::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .movie-hero .poster:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 35px 70px -12px rgba(0, 0, 0, 0.7);
+    }
+    
+    .movie-hero .poster:hover::after { opacity: 1; }
+    
+    .movie-hero .poster img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    
+    .movie-hero .poster:hover img { transform: scale(1.05); }
+    
+    /* Enhanced Typography */
+    #mv-title {
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+    
+    #mv-meta {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    #mv-desc {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    
+    /* Enhanced Trailer Section */
+    #mv-trailer {
+      margin-bottom: 2rem;
+    }
+    
+    .trailer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.4);
+    }
+    
+    .trailer-btn:hover {
+      color: white;
+      text-decoration: none;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px -5px rgba(239, 68, 68, 0.6);
+    }
+    
+    .trailer-btn .fa-play {
+      background: rgba(255,255,255,0.2);
+      padding: 8px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Enhanced Showtime Section */
+    .w3l-grids {
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      position: relative;
+    }
+    
+    .w3l-grids::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(180deg, #0f172a 0%, transparent 100%);
+    }
+    
+    .grids-main { position: relative; z-index: 2; }
+    
+    .hny-title {
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .hny-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+      border-radius: 2px;
+    }
+    
+    /* Enhanced Date Tabs */
+    .day-tab {
+      margin-bottom: 2rem;
+    }
+    
+    .day-tab button {
+      margin-right: 12px;
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+      border: 2px solid transparent;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .day-tab button:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    
+    .day-tab button.active {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      border-color: #ef4444;
+      color: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.4);
+    }
+    
+    /* Enhanced Showtime Chips */
+    .showtime-chip {
+      display: inline-block;
+      margin: 8px 8px 0 0;
+      padding: 12px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      backdrop-filter: blur(10px);
+      text-decoration: none;
+    }
+    
+    .showtime-chip:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ffffff;
+      text-decoration: none;
+      border-color: #ef4444;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.3);
+    }
+    
+    .showtime-chip:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+    }
+    
+    /* Cinema Info Cards */
+    .cinema-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+    
+    .cinema-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(239, 68, 68, 0.3);
+      transform: translateY(-5px);
+    }
+    
+    .cinema-name {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    
+    .cinema-address {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .movie-hero { padding: 40px 0 20px; }
+      #mv-title { font-size: 1.8rem; }
+      .day-tab button { padding: 10px 16px; font-size: 0.9rem; }
+      .showtime-chip { padding: 10px 16px; font-size: 0.9rem; }
+      .trailer-btn { padding: 12px 24px; }
+    }
+    
+    /* Loading Animation */
+    .loading-skeleton {
+      background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 8px;
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* Enhanced Breadcrumbs */
+    .w3l-breadcrumbs {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      padding: 20px 0;
+    }
+    
+    .w3l-breadcrumbs a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .w3l-breadcrumbs a:hover {
+      color: #ef4444;
+    }
+    
+    .breadcrumb_last {
+      color: #ef4444;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
-<header id="site-header" class="w3l-header fixed-top"> ... header hiện có ... </header>
+  <header id="site-header" class="w3l-header fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+      <div class="container">
+        <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log" aria-hidden="true"></span>
+            Nexus Net </a></h1>
+        
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="fa icon-expand fa-bars"></span>
+          <span class="fa icon-close fa-times"></span>
+        </button>
 
-<section class="movie-hero">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="poster"><img id="mv-poster" alt=""></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Trang chủ</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="movies.html">Phim</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Contact_Us.html">Liên hệ</a>
+            </li>
+          </ul>
+
+          <div class="search-right">
+            <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Tìm kiếm <span
+                class="fa fa-search ml-3" aria-hidden="true"></span></a>
+            <div id="search" class="pop-overlay">
+              <div class="popup">
+                <form action="#" method="post" class="search-box">
+                  <input type="search" placeholder="Search your Keyword" name="search" required="required" autofocus="">
+                  <button type="submit" class="btn"><span class="fa fa-search" aria-hidden="true"></span></button>
+                </form>
+                <div class="browse-items">
+                  <h3 class="hny-title two mt-md-5 mt-4">Xem tất cả:</h3>
+                  <ul class="search-items">
+                    <li><a href="movies.html">Hành động</a></li>
+                    <li><a href="movies.html">Chính kịch</a></li>
+                    <li><a href="movies.html">Gia đình</a></li>
+                    <li><a href="movies.html">Kinh dị</a></li>
+                    <li><a href="movies.html">Hài</a></li>
+                    <li><a href="movies.html">Lãng mạn</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="close" href="#close">×</a>
+            </div>
+          </div>
+          
+          <div class="Login_SignUp" id="login" style="font-size: 2rem ; display: inline-block; position: relative;">
+            <a class="nav-link" href="sign_in.html"><i class="fa fa-user-circle-o"></i></a>
+          </div>
+        </div>
+
+        <div class="mobile-position">
+          <nav class="navigation">
+            <div class="theme-switch-wrapper">
+              <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox">
+                <div class="mode-container">
+                  <i class="gg-sun"></i>
+                  <i class="gg-moon"></i>
+                </div>
+              </label>
+            </div>
+          </nav>
+        </div>
       </div>
-      <div class="col-md-8">
-        <h2 id="mv-title" class="hny-title mb-2">...</h2>
-        <p id="mv-meta" class="mb-2 text-muted">...</p>
-        <p id="mv-desc" class="mb-3">...</p>
-        <div id="mv-trailer" class="mb-3"></div>
+    </nav>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <div class="w3l-breadcrumbs">
+    <nav id="breadcrumbs" class="breadcrumbs">
+      <div class="container page-wrapper">
+        <a href="index.html">Trang chủ</a> » <a href="movies.html">Phim</a> » <span class="breadcrumb_last" aria-current="page" id="breadcrumb-title">Chi tiết phim</span>
       </div>
-    </div>
+    </nav>
   </div>
-</section>
 
-<section class="w3l-grids">
-  <div class="grids-main pb-5">
+  <!-- Movie Hero Section -->
+  <section class="movie-hero">
     <div class="container">
-      <h3 class="hny-title mb-3">Chọn suất chiếu</h3>
-      <div id="date-tabs" class="day-tab mb-3"></div>
-      <div id="showtime-list"></div>
+      <div class="row align-items-center">
+        <div class="col-lg-4 col-md-5 mb-4">
+          <div class="poster">
+            <img id="mv-poster" alt="Movie Poster" src="assets/images/placeholder-movie.jpg">
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-7">
+          <h2 id="mv-title" class="hny-title mb-3">Đang tải...</h2>
+          <p id="mv-meta" class="mb-3">Đang tải thông tin...</p>
+          <p id="mv-desc" class="mb-4">Đang tải mô tả phim...</p>
+          <div id="mv-trailer" class="mb-4">
+            <!-- Trailer button will be inserted here by JavaScript -->
+          </div>
+          
+          <!-- Additional movie info -->
+          <div class="movie-extra-info">
+            <div class="row">
+              <div class="col-sm-6 mb-3">
+                <h6 style="color: #ef4444; font-weight: 600; margin-bottom: 8px;">Thể loại</h6>
+                <p id="mv-genre" style="color: #cbd5e1;">Đang tải...</p>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <h6 style="color: #ef4444; font-weight: 600; margin-bottom: 8px;">Thời lượng</h6>
+                <p id="mv-duration" style="color: #cbd5e1;">Đang tải...</p>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <h6 style="color: #ef4444; font-weight: 600; margin-bottom: 8px;">Đạo diễn</h6>
+                <p id="mv-director" style="color: #cbd5e1;">Đang tải...</p>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <h6 style="color: #ef4444; font-weight: 600; margin-bottom: 8px;">Diễn viên</h6>
+                <p id="mv-actors" style="color: #cbd5e1;">Đang tải...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="w3l-footer"> ... footer hiện có ... </footer>
+  <!-- Showtimes Section -->
+  <section class="w3l-grids">
+    <div class="grids-main pb-5">
+      <div class="container">
+        <h3 class="hny-title mb-4">Chọn suất chiếu</h3>
+        <div id="date-tabs" class="day-tab mb-4"></div>
+        <div id="showtime-list">
+          <!-- Showtime content will be loaded by JavaScript -->
+          <div class="text-center" style="padding: 40px 0; color: #94a3b8;">
+            <div class="loading-skeleton" style="width: 100%; height: 200px; margin-bottom: 20px;"></div>
+            <p>Đang tải lịch chiếu...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/movies/detail-page.js"></script>
+  <!-- Footer -->
+  <footer class="w3l-footer">
+    <section class="footer-inner-main">
+      <div class="footer-hny-grids py-5">
+        <div class="container py-lg-4">
+          <div class="text-txt">
+            <div class="right-side">
+              <div class="row footer-about">
+                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                  <a href="movies.html"><img class="img-fluid" src="assets/images/banner1.jpg" alt=""></a>
+                </div>
+                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                  <a href="movies.html"><img class="img-fluid" src="assets/images/banner2.jpg" alt=""></a>
+                </div>
+                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                  <a href="movies.html"><img class="img-fluid" src="assets/images/banner3.jpg" alt=""></a>
+                </div>
+                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                  <a href="movies.html"><img class="img-fluid" src="assets/images/banner4.jpg" alt=""></a>
+                </div>
+              </div>
+              <div class="row footer-links">
+                <div class="col-md-3 col-sm-6 sub-two-right mt-5">
+                  <h6>Phim ảnh</h6>
+                  <ul>
+                    <li><a href="#">Phim</a></li>
+                    <li><a href="#">Video</a></li>
+                    <li><a href="#">Phim tiếng Anh</a></li>
+                    <li><a href="#">Phù hợp với sở thích của bạn</a></li>
+                    <li><a href="#">Phim sắp ra mắt</a></li>
+                    <li><a href="Contact_Us.html">Liên hệ với chúng tôi</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 sub-two-right mt-5">
+                  <h6>Thông tin</h6>
+                  <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="#">Tv Series</a></li>
+                    <li><a href="#">Blogs</a></li>
+                    <li><a href="sign_in.html">Đăng nhập</a></li>
+                    <li><a href="Contact_Us.html">Liên hệ</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 sub-two-right mt-5">
+                  <h6>Rạp chiếu</h6>
+                  <ul>
+                    <li><a href="movies.html">Châu Á</a></li>
+                    <li><a href="movies.html">Pháp</a></li>
+                    <li><a href="movies.html">Đài Loan</a></li>
+                    <li><a href="movies.html">Hoa Kỳ</a></li>
+                    <li><a href="movies.html">Hàn Quốc</a></li>
+                    <li><a href="movies.html">Vương quốc Anh</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 sub-two-right mt-5">
+                  <h6>Tin tức & ưu đãi</h6>
+                  <form action="#" class="subscribe mb-3" method="post">
+                    <input type="email" name="email" placeholder="Địa chỉ email của bạn" required="">
+                    <button><span class="fa fa-envelope-o"></span></button>
+                  </form>
+                  <p>Nhập email của bạn và nhận thông tin mới nhất, cập nhật và ưu đãi đặc biệt từ chúng tôi.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="below-section">
+        <div class="container">
+          <div class="copyright-footer">
+            <div class="columns text-lg-left">
+              <p>&copy; 2025 Nexus Net. Mọi quyền được bảo lưu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Move to top button -->
+      <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fa fa-arrow-up" aria-hidden="true"></span>
+      </button>
+      <script>
+        window.onscroll = function () { scrollFunction() };
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+          } else {
+            document.getElementById("movetop").style.display = "none";
+          }
+        }
+        function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+        }
+      </script>
+    </section>
+  </footer>
+
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/theme-change.js"></script>
+  <script src="assets/js/auth/state.js"></script>
+  <script src="assets/js/movies/detail-page.js"></script>
+
+  <!-- Enhanced Navigation Behaviors -->
+  <script>
+    $(function () {
+      $('.navbar-toggler').click(function(){ $('body').toggleClass('noscroll'); });
+      $(window).on("scroll", function () {
+        var s = $(window).scrollTop();
+        if (s >= 80) { $("#site-header").addClass("nav-fixed"); }
+        else { $("#site-header").removeClass("nav-fixed"); }
+      });
+      $(".navbar-toggler").on("click", function () { $("header").toggleClass("active"); });
+      $(window).on("resize", function () { if ($(window).width() > 991) $("header").removeClass("active"); });
+    });
+  </script>
 </body>
 </html>
