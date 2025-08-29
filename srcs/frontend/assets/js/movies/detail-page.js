@@ -1,6 +1,6 @@
 (function(){
   const API_DETAIL   = '/backend/apis/movies/detail.php';
-  const API_SHOWTIME = '/backend/apis/showtimes/by-movie.php';
+  const API_SHOWTIME = '/backend/apis/movies/by-movie.php';
 
   const qs = new URLSearchParams(location.search);
   const slug = qs.get('slug');
@@ -114,4 +114,33 @@
       })
       .catch(e => { console.warn(e); el.list.innerHTML = '<p>Lỗi tải suất chiếu.</p>'; });
   }
+
+  async function buildTabsFromAvailableDates(movieId){
+    const r = await fetch(`/backend/apis/movies/available_dates.php?movie_id=${movieId}`);
+    const j = await r.json();
+    const dates = Array.isArray(j.data) ? j.data : [];
+
+    el.tabs.innerHTML = '';
+    if (!dates.length){
+      // fallback: vẫn vẽ 7 ngày từ hôm nay
+      return buildDateTabs(movieId);
+    }
+    dates.forEach((dateStr, i) => {
+      const d = new Date(dateStr+'T00:00:00');
+      const label = d.toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
+      const btn = document.createElement('button');
+      btn.type='button'; btn.className='btn btn-outline-light mr-2 mb-2';
+      btn.textContent = label.replace(',', ''); btn.dataset.date = dateStr;
+      if (i===0) btn.classList.add('active');
+      btn.onclick = () => {
+        [...el.tabs.querySelectorAll('button')].forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        loadShowtimes(movieId, dateStr);
+      };
+      el.tabs.appendChild(btn);
+    });
+    // tự tải ngày đầu tiên có suất
+    loadShowtimes(movieId, dates[0]);
+  }
+
 })();
