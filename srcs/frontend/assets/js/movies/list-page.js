@@ -16,8 +16,8 @@
     s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   const resolveUrl = (u) => {
-    if (!u) return '';
-    if (u.startsWith('http') || u.startsWith('/')) return u;
+    if (!u) return '/frontend/assets/images/placeholder-poster.jpg'; // THÊM DEFAULT
+    if (u.startsWith('http') || u.startsWith('/')) return u; // THÊM RETURN
     return '/frontend/' + u.replace(/^\/+/, '');
   };
 
@@ -25,22 +25,43 @@
     const poster = resolveUrl(movie.poster_url || movie.backdrop_url || '');
     const title  = esc(movie.title || '');
     const mins   = movie.duration_min ? `${movie.duration_min} phút` : '—';
+    const slug   = encodeURIComponent(movie.slug || movie.id);
+    const badge  = movie.status === 'now_showing'
+      ? '<span class="badge badge-green">Đang chiếu</span>'
+      : (movie.status === 'coming_soon' ? '<span class="badge">Sắp chiếu</span>' : '');
 
+    // THÊM RETURN STATEMENT - ĐÂY LÀ NGUYÊN NHÂN CHÍNH
     return `
-      <div class="item vhny-grid col-6 col-md-4 col-lg-3 mb-4">
-        <div class="box16 mb-0 movie-card">
-          <a href="movie-detail.html?slug=${encodeURIComponent(movie.slug || movie.id)}">
-            <figure>
-              <img class="img-fluid" loading="lazy" src="${poster}" alt="${title}">
-            </figure>
-            <div class="box-content">
-              <h3 class="title" title="${title}">${title}</h3>
-              <h4><span class="post"><span class="fa fa-clock-o"></span> ${mins}</span></h4>
+      <div class="col col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+        <div class="movie-card">
+          <a href="movie-detail.html?slug=${slug}">
+            <div class="poster">
+              ${badge}
+              <img loading="lazy" src="${poster}" alt="${title}">
+              <div class="play-overlay">
+                <div class="play-btn">
+                  <i class="fa fa-play"></i>
+                </div>
+              </div>
             </div>
           </a>
+          <div class="movie-content">
+            <h3 class="movie-title" title="${title}">${title}</h3>
+            <div class="movie-meta">
+              <div class="movie-duration">
+                <i class="fa fa-clock-o"></i>
+                <span>${mins}</span>
+              </div>
+            </div>
+            <div class="movie-actions">
+              <button class="btn-buy" onclick="openShowtimesPopup(${movie.id}, '${esc(title)}')">
+                <i class="fa fa-ticket"></i> MUA VÉ
+              </button>
+            </div>
+          </div>
         </div>
       </div>`;
-  }
+}
 
   function setLoadingUI(on) {
     loading = on;
@@ -78,27 +99,3 @@
   loadMore();
   btnMore.addEventListener('click', loadMore);
 })();
-
-function card(movie){
-  const title  = esc(movie.title || '');
-  const mins   = movie.duration_min ? `${movie.duration_min} phút` : '—';
-  const slug   = encodeURIComponent(movie.slug || movie.id);
-  const poster = resolveUrl(movie.poster_url || movie.backdrop_url || '/frontend/assets/images/placeholder-poster.jpg');
-  const badge  = movie.status === 'now_showing'
-    ? '<span class="badge badge-green">Đang chiếu</span>'
-    : (movie.status === 'coming_soon' ? '<span class="badge">Sắp chiếu</span>' : '');
-
-  return `
-    <div class="col col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
-      <a class="movie-card" href="movie-detail.html?slug=${slug}">
-        <div class="poster">
-          ${badge}
-          <img loading="lazy" src="${poster}" alt="${title}">
-        </div>
-        <div class="meta">
-          <div class="title" title="${title}">${title}</div>
-          <div class="duration"><span class="fa fa-clock-o"></span> ${mins}</div>
-        </div>
-      </a>
-    </div>`;
-}
