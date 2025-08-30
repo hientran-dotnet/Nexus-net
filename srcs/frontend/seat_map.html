@@ -1,0 +1,23 @@
+
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chọn ghế (placeholder)</title>
+  <link rel="stylesheet" href="assets/css/style-starter.css">
+  <style> .box{max-width:720px;margin:6rem auto;padding:2rem;border:1px solid #e5e7eb;border-radius:.75rem;} </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Trang chọn ghế</h2>
+    <p>Đây là trang placeholder để bạn test link từ trang suất chiếu.</p>
+    <script>
+      const params = new URLSearchParams(location.search);
+      document.write('<p><strong>showtime_id:</strong> '+ (params.get('showtime_id')||'-') +'</p>');
+    </script>
+    <p>Bạn sẽ thay trang này bằng UI seat map thật sau.</p>
+    <p><a href="javascript:history.back()">&larr; Quay lại</a></p>
+  </div>
+</body>
+</html>

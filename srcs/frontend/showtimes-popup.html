@@ -1,0 +1,130 @@
+<!-- Nút mở popup -->
+<button class="btn btn-primary" onclick="openShowtimesPopup(1)">Xem suất chiếu</button>
+
+<!-- Overlay & Popup -->
+<div id="showtimes-popup" class="popup-overlay">
+  <div class="popup-box">
+    <span class="close-btn" onclick="closeShowtimesPopup()">&times;</span>
+    <h4 id="popup-movie-title">Tên phim</h4>
+
+    <!-- Thanh chọn ngày -->
+    <div id="popup-dates" class="date-bar mb-3"></div>
+
+    <!-- Danh sách suất chiếu -->
+    <div id="popup-showtimes"></div>
+  </div>
+</div>
+
+<style>
+/* Overlay */
+.popup-overlay {
+  position: fixed; top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.7);
+  display: none; justify-content:center; align-items:center;
+  z-index: 9999;
+}
+/* Hộp popup */
+.popup-box {
+  background: #fff;
+  max-width: 900px;
+  width: 95%;
+  padding: 1.5rem;
+  border-radius: .75rem;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+.close-btn {
+  float:right; font-size:2rem; cursor:pointer;
+}
+.date-bar {
+  display:flex; flex-wrap:wrap; gap:.5rem;
+}
+.date-chip {
+  border:1px solid #ccc; border-radius:4px;
+  padding:.4rem .7rem; cursor:pointer; font-weight:600;
+  background:#f9f9f9;
+}
+.date-chip.active { background:#111827; color:#fff; border-color:#111827; }
+.showtime-group { margin-bottom:1rem; }
+.showtime-title { font-weight:600; margin-bottom:.5rem; }
+.showtime-times a {
+  display:inline-block; border:1px solid #ccc; padding:.4rem .7rem;
+  border-radius:4px; margin:.2rem; text-decoration:none; color:#111;
+}
+.showtime-times a:hover { background:#111827; color:#fff; }
+</style>
+
+<script>
+const API_BASE = "/backend/apis/movies/"; // sửa path cho đúng
+
+function openShowtimesPopup(movieId) {
+  document.getElementById('showtimes-popup').style.display='flex';
+  loadPopupMovie(movieId);
+}
+function closeShowtimesPopup(){
+  document.getElementById('showtimes-popup').style.display='none';
+}
+
+// Render thanh chọn ngày (7 ngày tới)
+function renderPopupDates(movieId){
+  const wrap=document.getElementById('popup-dates'); wrap.innerHTML='';
+  const today=new Date(); today.setHours(0,0,0,0);
+  for(let i=0;i<7;i++){
+    const d=new Date(today); d.setDate(today.getDate()+i);
+    const iso=d.toISOString().slice(0,10);
+    const label=d.toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
+    const chip=document.createElement('div');
+    chip.className='date-chip'+(i===0?' active':'');
+    chip.textContent=label;
+    chip.onclick=()=>{
+      document.querySelectorAll('.date-chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      loadPopupShowtimes(movieId, iso);
+    };
+    wrap.appendChild(chip);
+  }
+  // load ngày đầu
+  loadPopupShowtimes(movieId, today.toISOString().slice(0,10));
+}
+
+async function loadPopupMovie(movieId){
+  // Giả sử bạn có API lấy phim, nếu chưa thì chỉ set tạm tên
+  document.getElementById('popup-movie-title').textContent="Suất chiếu phim #"+movieId;
+  renderPopupDates(movieId);
+}
+
+async function loadPopupShowtimes(movieId, date){
+  const box=document.getElementById('popup-showtimes');
+  box.innerHTML='<p>Đang tải...</p>';
+  try{
+    const res=await fetch(API_BASE+'showtimes.php?movie_id='+movieId+'&date='+date);
+    const data=await res.json();
+    if(!data.ok || !data.showtimes.length){ box.innerHTML='<p>Không có suất chiếu</p>'; return;}
+    
+    // Nhóm theo rạp (auditorium_name)
+    const groups={};
+    data.showtimes.forEach(st=>{
+      groups[st.auditorium_name] ||= [];
+      groups[st.auditorium_name].push(st);
+    });
+
+    box.innerHTML='';
+    Object.entries(groups).forEach(([rap,arr])=>{
+      const div=document.createElement('div'); div.className='showtime-group';
+      div.innerHTML=`<div class="showtime-title">${rap}</div>`;
+      const times=document.createElement('div'); times.className='showtime-times';
+      arr.forEach(st=>{
+        const t=new Date(st.starts_at);
+        const btn=document.createElement('a');
+        btn.textContent=t.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+        btn.href='seat_map.html?showtime_id='+st.id; // sang trang chọn ghế
+        times.appendChild(btn);
+      });
+      div.appendChild(times);
+      box.appendChild(div);
+    });
+  }catch(e){
+    box.innerHTML='<p>Lỗi tải suất chiếu</p>';
+  }
+}
+</script>
