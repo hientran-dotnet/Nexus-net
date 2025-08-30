@@ -1,0 +1,390 @@
+/* Modern Cinema Seat Map - New Clean Style */
+
+.seat-grid {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: linear-gradient(145deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    border-radius: 25px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.seat-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Cinema Screen */
+.cinema-screen {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 10;
+}
+
+.cinema-screen::before {
+    content: '';
+    display: block;
+    width: 90%;
+    height: 12px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #00f5ff 15%, 
+        #ffffff 50%, 
+        #00f5ff 85%, 
+        transparent 100%);
+    margin: 0 auto 20px;
+    border-radius: 50px;
+    box-shadow: 
+        0 0 30px rgba(0, 245, 255, 0.6),
+        0 0 60px rgba(0, 245, 255, 0.3);
+    animation: screenPulse 4s ease-in-out infinite;
+}
+
+.screen-text {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes screenPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 0 30px rgba(0, 245, 255, 0.6),
+            0 0 60px rgba(0, 245, 255, 0.3);
+    }
+    50% { 
+        box-shadow: 
+            0 0 40px rgba(0, 245, 255, 0.9),
+            0 0 80px rgba(0, 245, 255, 0.5);
+    }
+}
+
+/* Seat Row Container */
+.seat-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 60px 1fr 50px;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+/* Row Labels */
+.row-label {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 8px 20px rgba(102, 126, 234, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.row-label::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #667eea);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+/* Seat Sections */
+.seat-section {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+
+/* Center Aisle */
+.center-aisle {
+    width: 60px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-aisle::before {
+    content: '';
+    width: 3px;
+    height: 30px;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.2) 20%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 255, 255, 0.2) 80%, 
+        transparent 100%);
+    border-radius: 2px;
+}
+
+/* Seat Buttons */
+.seat {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.seat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        transparent 40%, 
+        rgba(0, 0, 0, 0.1) 100%);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+/* Available Seats */
+.seat.seat-available {
+    background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+    color: #ffffff;
+    transform: translateY(0) scale(1);
+}
+
+.seat.seat-available:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 
+        0 15px 40px rgba(0, 180, 219, 0.4),
+        0 0 30px rgba(0, 180, 219, 0.3);
+    background: linear-gradient(135deg, #00c6e6 0%, #0094c2 100%);
+}
+
+/* Selected Seats */
+.seat.seat-selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 12px 35px rgba(102, 126, 234, 0.6),
+        0 0 25px rgba(102, 126, 234, 0.4);
+    animation: selectedPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes selectedPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 12px 35px rgba(102, 126, 234, 0.6),
+            0 0 25px rgba(102, 126, 234, 0.4);
+    }
+    50% { 
+        box-shadow: 
+            0 15px 45px rgba(102, 126, 234, 0.8),
+            0 0 35px rgba(102, 126, 234, 0.6);
+    }
+}
+
+/* VIP Seats */
+.seat.seat-vip.seat-available {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    position: relative;
+}
+
+.seat.seat-vip.seat-available::after {
+    content: '👑';
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    animation: crownBounce 3s ease-in-out infinite;
+}
+
+@keyframes crownBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-3px) rotate(-5deg); }
+    75% { transform: translateY(-1px) rotate(5deg); }
+}
+
+.seat.seat-vip.seat-available:hover {
+    background: linear-gradient(135deg, #f1a4fc 0%, #f6677d 100%);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 
+        0 15px 40px rgba(240, 147, 251, 0.5),
+        0 0 30px rgba(240, 147, 251, 0.3);
+}
+
+.seat.seat-vip.seat-selected {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: #2c3e50;
+}
+
+/* Occupied Seats */
+.seat.seat-occupied {
+    background: linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%);
+    color: #7f8c8d;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: scale(0.95);
+}
+
+.seat.seat-occupied::after {
+    content: '✕';
+    position: absolute;
+    font-size: 20px;
+    color: #e74c3c;
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Loading Animation */
+.seat-loading {
+    animation: seatAppear 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes seatAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotateY(180deg);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1) rotateY(90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .seat-grid {
+        padding: 20px 15px;
+        margin: 0 10px;
+    }
+    
+    .seat-row {
+        grid-template-columns: 35px 1fr 40px 1fr 35px;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    
+    .seat {
+        width: 35px;
+        height: 35px;
+        font-size: 11px;
+    }
+    
+    .row-label {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .seat-section {
+        gap: 6px;
+    }
+    
+    .center-aisle {
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .seat {
+        width: 28px;
+        height: 28px;
+        font-size: 9px;
+        border-radius: 8px;
+    }
+    
+    .row-label {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    .seat-row {
+        grid-template-columns: 28px 1fr 30px 1fr 28px;
+        gap: 6px;
+    }
+    
+    .seat-section {
+        gap: 4px;
+    }
+    
+    .center-aisle {
+        width: 30px;
+    }
+    
+    .screen-text {
+        font-size: 14px;
+    }
+}
+
+/* Special Effects */
+.seat-map-container {
+    position: relative;
+}
+
+.seat-map-container::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    right: -50px;
+    bottom: -50px;
+    background: radial-gradient(ellipse at center, 
+        rgba(0, 245, 255, 0.1) 0%, 
+        rgba(102, 126, 234, 0.05) 40%, 
+        transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Thanh toán - Nexus Net</title>
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/payment.css">
+</head>
+
+<body>
+    <!-- header -->
+    <header id="site-header" class="w3l-header fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+            <div class="container">
+                <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log" aria-hidden="true"></span>
+                    Nexus Net </a></h1>
+                
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="fa icon-expand fa-bars"></span>
+                    <span class="fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="movies.html">Phim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Contact_Us.html">Liên hệ</a>
+                        </li>
+                    </ul>
+
+                    <div class="search-right">
+                        <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Tìm kiếm <span
+                                class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                    </div>
+                    
+                    <div class="Login_SignUp" id="login" style="font-size: 2rem ; display: inline-block; position: relative;">
+                        <a class="nav-link" href="sign_in.html"><i class="fa fa-user-circle-o"></i></a>
+                    </div>
+                </div>
+
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- breadcrumbs -->
+    <div class="w3l-breadcrumbs">
+        <nav id="breadcrumbs" class="breadcrumbs">
+            <div class="container page-wrapper">
+                <a href="index.html">Trang chủ</a> » 
+                <a href="movies.html">Phim</a> » 
+                <a href="booking.html">Đặt vé</a> » 
+                <span class="breadcrumb_last" aria-current="page">Thanh toán</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Progress Steps -->
+    <section class="progress-section">
+        <div class="container">
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Chọn ghế</div>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Thanh toán</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Hoàn thành</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Content -->
+    <section class="payment-section">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Payment Form -->
+                <div class="col-lg-8">
+                    <div class="payment-form-container">
+                        <h3 class="mb-4">Thông tin thanh toán</h3>
+                        
+                        <!-- Payment Methods -->
+                        <div class="payment-methods mb-4">
+                            <h5>Chọn phương thức thanh toán</h5>
+                            <div class="payment-options">
+                                <div class="payment-option">
+                                    <input type="radio" id="credit-card" name="payment-method" value="credit-card" checked>
+                                    <label for="credit-card">
+                                        <i class="fa fa-credit-card"></i>
+                                        Thẻ tín dụng/Ghi nợ
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" id="momo" name="payment-method" value="momo">
+                                    <label for="momo">
+                                        <i class="fa fa-mobile"></i>
+                                        Ví MoMo
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" id="bank-transfer" name="payment-method" value="bank-transfer">
+                                    <label for="bank-transfer">
+                                        <i class="fa fa-university"></i>
+                                        Chuyển khoản ngân hàng
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" id="cash" name="payment-method" value="cash">
+                                    <label for="cash">
+                                        <i class="fa fa-money"></i>
+                                        Thanh toán tại quầy
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Credit Card Form -->
+                        <div id="credit-card-form" class="payment-form">
+                            <form id="payment-form">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="card-name">Tên chủ thẻ</label>
+                                        <input type="text" class="form-control" id="card-name" placeholder="Nguyễn Văn A" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="card-number">Số thẻ</label>
+                                        <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="expiry-date">Ngày hết hạn</label>
+                                        <input type="text" class="form-control" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="cvv">CVV</label>
+                                        <input type="text" class="form-control" id="cvv" placeholder="123" maxlength="3" required>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- MoMo Form -->
+                        <div id="momo-form" class="payment-form" style="display: none;">
+                            <div class="momo-instructions">
+                                <h5>Thanh toán qua Ví MoMo</h5>
+                                <p>Quét mã QR bằng ứng dụng MoMo để thanh toán</p>
+                                <div class="qr-code-placeholder">
+                                    <i class="fa fa-qrcode" style="font-size: 120px; color: #ddd;"></i>
+                                    <p class="mt-2">Mã QR sẽ hiển thị sau khi xác nhận</p>
+                                </div>
+                                <div class="momo-phone">
+                                    <label for="momo-phone-number">Số điện thoại MoMo</label>
+                                    <input type="tel" class="form-control" id="momo-phone-number" placeholder="0987654321">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bank Transfer Form -->
+                        <div id="bank-transfer-form" class="payment-form" style="display: none;">
+                            <div class="bank-info">
+                                <h5>Thông tin chuyển khoản</h5>
+                                <div class="bank-details">
+                                    <p><strong>Ngân hàng:</strong> Vietcombank</p>
+                                    <p><strong>Số tài khoản:</strong> 1234567890</p>
+                                    <p><strong>Tên tài khoản:</strong> CONG TY NEXUS NET</p>
+                                    <p><strong>Nội dung:</strong> <span id="transfer-content">THANHTOAN [MÃ ĐƠN HÀNG]</span></p>
+                                </div>
+                                <div class="alert alert-info">
+                                    <i class="fa fa-info-circle"></i>
+                                    Vui lòng chuyển khoản đúng nội dung để hệ thống tự động xác nhận thanh toán.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cash Payment Form -->
+                        <div id="cash-form" class="payment-form" style="display: none;">
+                            <div class="cash-info">
+                                <h5>Thanh toán tại quầy</h5>
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle"></i>
+                                    Vui lòng đến rạp trước giờ chiếu 30 phút để thanh toán và nhận vé.
+                                </div>
+                                <p><strong>Địa chỉ rạp:</strong> <span id="cinema-address">123 Đường ABC, Quận 1, TP.HCM</span></p>
+                                <p><strong>Thời gian:</strong> Trước <span id="payment-deadline">30 phút</span> so với giờ chiếu</p>
+                            </div>
+                        </div>
+
+                        <!-- Customer Information -->
+                        <div class="customer-info mt-4">
+                            <h5>Thông tin khách hàng</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customer-name">Họ và tên</label>
+                                    <input type="text" class="form-control" id="customer-name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="customer-phone">Số điện thoại</label>
+                                    <input type="tel" class="form-control" id="customer-phone" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="customer-email">Email</label>
+                                    <input type="email" class="form-control" id="customer-email" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="order-summary">
+                        <h4>Thông tin đơn hàng</h4>
+                        
+                        <!-- Movie Info -->
+                        <div class="movie-summary">
+                            <img id="summary-poster" src="assets/images/banner1.jpg" alt="Movie Poster" class="movie-poster-small">
+                            <div class="movie-details">
+                                <h5 id="summary-title">Tên phim</h5>
+                                <p class="mb-1"><i class="fa fa-calendar"></i> <span id="summary-date">Ngày chiếu</span></p>
+                                <p class="mb-1"><i class="fa fa-clock-o"></i> <span id="summary-time">Giờ chiếu</span></p>
+                                <p class="mb-0"><i class="fa fa-map-marker"></i> <span id="summary-cinema">Rạp chiếu</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Seat Information -->
+                        <div class="seat-summary">
+                            <h5>Ghế đã chọn</h5>
+                            <div id="summary-seats" class="seats-list">
+                                <!-- Seats will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="price-summary">
+                            <div class="price-item normal-price">
+                                <span>Ghế thường (<span id="normal-count">0</span> ghế):</span>
+                                <span id="normal-total">0đ</span>
+                            </div>
+                            <div class="price-item vip-price">
+                                <span>Ghế VIP (<span id="vip-count">0</span> ghế):</span>
+                                <span id="vip-total">0đ</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Phí dịch vụ:</span>
+                                <span id="service-fee">5,000đ</span>
+                            </div>
+                            <hr>
+                            <div class="price-item total">
+                                <span>Tổng cộng:</span>
+                                <span id="final-total">0đ</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="payment-actions">
+                            <button id="btn-payment" class="btn btn-primary btn-block">
+                                <i class="fa fa-credit-card"></i> Xác nhận thanh toán
+                            </button>
+                            <button id="btn-back-booking" class="btn btn-secondary btn-block mt-2">
+                                <i class="fa fa-arrow-left"></i> Quay lại chọn ghế
+                            </button>
+                        </div>
+
+                        <!-- Security Info -->
+                        <div class="security-info mt-3">
+                            <p class="text-muted small">
+                                <i class="fa fa-lock"></i> Thông tin của bạn được bảo mật và mã hóa
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="w3l-footer">
+        <section class="footer-inner-main">
+            <div class="footer-hny-grids py-5">
+                <div class="container py-lg-4">
+                    <div class="text-txt">
+                        <div class="right-side">
+                            <div class="row footer-about">
+                                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner1.jpg" alt=""></a>
+                                </div>
+                                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner2.jpg" alt=""></a>
+                                </div>
+                                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner3.jpg" alt=""></a>
+                                </div>
+                                <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                    <a href="movies.html"><img class="img-fluid" src="assets/images/banner4.jpg" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="below-section">
+                <div class="container">
+                    <div class="copyright-footer">
+                        <div class="columns text-lg-left">
+                            <p>&copy; 2025 Nexus Net. Mọi quyền được bảo lưu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fa fa-arrow-up" aria-hidden="true"></span>
+            </button>
+            <script>
+                window.onscroll = function () { scrollFunction() };
+                function scrollFunction() {
+                    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                        document.getElementById("movetop").style.display = "block";
+                    } else {
+                        document.getElementById("movetop").style.display = "none";
+                    }
+                }
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                }
+            </script>
+        </section>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/theme-change.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/auth/state.js"></script>
+    <script src="assets/js/booking-test.js"></script>
+    <script src="assets/js/payment.js"></script>
+</body>
+</html>

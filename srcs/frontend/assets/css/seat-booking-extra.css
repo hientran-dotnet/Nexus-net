@@ -1,0 +1,361 @@
+/* Modern Cinema Seat Map Styles */
+
+.seat-grid {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Cinema Screen */
+.cinema-screen {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.cinema-screen::before {
+    content: '';
+    display: block;
+    width: 80%;
+    height: 8px;
+    background: linear-gradient(90deg, #00d4ff 0%, #ffffff 50%, #00d4ff 100%);
+    margin: 0 auto 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+    animation: screenGlow 3s ease-in-out infinite alternate;
+}
+
+.screen-text {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+@keyframes screenGlow {
+    0% { box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4); }
+    100% { box-shadow: 0 4px 30px rgba(0, 212, 255, 0.8); }
+}
+
+/* Seat Rows */
+.seat-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.row-label {
+    width: 35px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    padding: 8px 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Seat Sections */
+.seat-section {
+    display: flex;
+    gap: 8px;
+}
+
+.center-aisle {
+    width: 40px;
+    min-height: 35px;
+    position: relative;
+}
+
+.center-aisle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom, transparent, #444, transparent);
+    opacity: 0.3;
+}
+
+/* Modern Seat Styles */
+.seat {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.seat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+/* Available Seats */
+.seat.seat-available {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #ffffff;
+    transform: translateY(0);
+}
+
+.seat.seat-available:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+    background: linear-gradient(135deg, #5fbdff 0%, #1af3ff 100%);
+}
+
+/* Selected Seats */
+.seat.seat-selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    animation: seatPulse 2s ease-in-out infinite;
+}
+
+@keyframes seatPulse {
+    0%, 100% { box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5); }
+    50% { box-shadow: 0 8px 30px rgba(102, 126, 234, 0.8); }
+}
+
+/* Occupied Seats */
+.seat.seat-occupied {
+    background: linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%);
+    color: #7f8c8d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.seat.seat-occupied::after {
+    content: '✕';
+    position: absolute;
+    font-size: 16px;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* VIP Seats */
+.seat.seat-vip.seat-available {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    position: relative;
+}
+
+.seat.seat-vip.seat-available::after {
+    content: '👑';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 12px;
+    animation: crownFloat 2s ease-in-out infinite;
+}
+
+@keyframes crownFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
+.seat.seat-vip.seat-available:hover {
+    background: linear-gradient(135deg, #f1a4fc 0%, #f6677d 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+}
+
+.seat.seat-vip.seat-selected {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: #2c3e50;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .seat-grid {
+        padding: 20px 10px;
+        max-width: 100%;
+    }
+    
+    .seat {
+        width: 32px;
+        height: 32px;
+        font-size: 10px;
+    }
+    
+    .row-label {
+        width: 28px;
+        font-size: 14px;
+        padding: 6px 2px;
+    }
+    
+    .center-aisle {
+        width: 30px;
+    }
+    
+    .seat-section {
+        gap: 6px;
+    }
+    
+    .seat-row {
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .seat {
+        width: 28px;
+        height: 28px;
+        font-size: 9px;
+    }
+    
+    .row-label {
+        width: 24px;
+        font-size: 12px;
+    }
+    
+    .center-aisle {
+        width: 25px;
+    }
+}
+
+/* Loading Animation */
+.seat-loading {
+    animation: seatLoad 1.5s ease-in-out;
+}
+
+@keyframes seatLoad {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotateY(180deg);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8) rotateY(90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+    }
+}
+
+.seat.seat-vip {
+    background: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.seat.seat-selected {
+    background: #833ab4 !important;
+    border-color: #833ab4 !important;
+    color: white;
+}
+
+.seat.seat-occupied {
+    background: #dc3545;
+    border-color: #dc3545;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.seat.seat-occupied:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.seat-gap {
+    width: 20px;
+}
+
+.seat-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 2px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.seat-tag.normal {
+    background: #28a745;
+    color: white;
+}
+
+.seat-tag.vip {
+    background: #ffc107;
+    color: #212529;
+}
+
+.booking-summary {
+    background: var(--bg-color-1);
+    padding: 20px;
+    border-radius: 10px;
+    position: sticky;
+    top: 100px;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.price-item.total {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    border-top: 1px solid var(--border-color);
+    padding-top: 8px;
+    margin-top: 10px;
+}
+
+.btn-primary:disabled {
+    background: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .seat {
+        width: 30px;
+        height: 30px;
+        font-size: 0.7rem;
+    }
+    
+    .seat-row {
+        gap: 2px;
+    }
+    
+    .row-label {
+        width: 25px;
+        margin-right: 5px;
+    }
+}

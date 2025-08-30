@@ -1,0 +1,210 @@
+/* Simple Clean Cinema Seat Map */
+
+.seat-grid {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Simple Screen */
+.cinema-screen {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #333;
+    position: relative;
+}
+
+.screen-text {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* Seat Row Layout */
+.seat-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 50px 1fr 40px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* Row Labels */
+.row-label {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #666;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Seat Sections */
+.seat-section {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    justify-items: center;
+}
+
+/* Center Aisle */
+.center-aisle {
+    width: 50px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-aisle::before {
+    content: '';
+    width: 2px;
+    height: 20px;
+    background: #ddd;
+}
+
+/* Simple Seat Buttons */
+.seat {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #333;
+}
+
+.seat:hover:not(.seat-occupied) {
+    border-color: #007bff;
+    transform: scale(1.05);
+}
+
+/* Available Seats */
+.seat.seat-available {
+    background: #28a745;
+    color: #fff;
+    border-color: #28a745;
+}
+
+.seat.seat-available:hover {
+    background: #218838;
+    border-color: #1e7e34;
+}
+
+/* Selected Seats */
+.seat.seat-selected {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    transform: scale(1.05);
+}
+
+/* VIP Seats */
+.seat.seat-vip.seat-available {
+    background: #ffc107;
+    color: #333;
+    border-color: #ffc107;
+    font-weight: 700;
+}
+
+.seat.seat-vip.seat-available:hover {
+    background: #e0a800;
+    border-color: #d39e00;
+}
+
+.seat.seat-vip.seat-selected {
+    background: #fd7e14;
+    color: #fff;
+    border-color: #fd7e14;
+}
+
+/* Occupied Seats */
+.seat.seat-occupied {
+    background: #6c757d;
+    color: #fff;
+    border-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.seat.seat-occupied::after {
+    content: '×';
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .seat-grid {
+        padding: 20px 15px;
+        margin: 0 10px;
+    }
+    
+    .seat-row {
+        grid-template-columns: 30px 1fr 40px 1fr 30px;
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+    
+    .seat {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
+    }
+    
+    .row-label {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    .seat-section {
+        gap: 5px;
+    }
+    
+    .center-aisle {
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .seat {
+        width: 24px;
+        height: 24px;
+        font-size: 9px;
+    }
+    
+    .row-label {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+    
+    .seat-row {
+        grid-template-columns: 24px 1fr 30px 1fr 24px;
+        gap: 4px;
+    }
+    
+    .seat-section {
+        gap: 3px;
+    }
+}
