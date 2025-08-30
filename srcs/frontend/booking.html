@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đặt vé xem phim - Nexus Net</title>
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/seat-booking.css">
+</head>
+
+<body>
+    <!-- header -->
+    <header id="site-header" class="w3l-header fixed-top">
+        <!--/nav-->
+        <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+			<div class="container">
+				<h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
+							aria-hidden="true"></span>
+						Nexus Net </a></h1>
+				<!-- if logo is image enable this   
+							<a class="navbar-brand" href="#index.html">
+								<img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+							</a> -->
+				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<!-- <span class="navbar-toggler-icon"></span> -->
+					<span class="fa icon-expand fa-bars"></span>
+					<span class="fa icon-close fa-times"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Trang chủ</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="movies.html">Phim</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="about.html">Giới thiệu</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="Contact_Us.html">Liên hệ</a>
+						</li>
+					</ul>
+
+					<!--/search-right-->
+					<!--/search-right-->
+					<div class="search-right">
+						<a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Tìm kiếm <span
+								class="fa fa-search ml-3" aria-hidden="true"></span></a>
+						<!-- search popup -->
+						<div id="search" class="pop-overlay">
+							<div class="popup">
+								<form action="#" method="post" class="search-box">
+									<input type="search" placeholder="Search your Keyword" name="search"
+										required="required" autofocus="">
+									<button type="submit" class="btn"><span class="fa fa-search"
+											aria-hidden="true"></span></button>
+								</form>
+								<div class="browse-items">
+									<h3 class="hny-title two mt-md-5 mt-4">Xem tất cả:</h3>
+									<ul class="search-items">
+										<li><a href="movies.html">Hành động</a></li>
+										<li><a href="movies.html">Chính kịch</a></li>
+										<li><a href="movies.html">Gia đình</a></li>
+										<li><a href="movies.html">Kinh dị</a></li>
+										<li><a href="movies.html">Hài</a></li>
+										<li><a href="movies.html">Lãng mạn</a></li>
+										<li><a href="movies.html">Phim bộ</a></li>
+										<li><a href="movies.html">Kinh dị</a></li>
+										<li><a href="movies.html">Hành động</a></li>
+										<li><a href="movies.html">Chính kịch</a></li>
+										<li><a href="movies.html">Gia đình</a></li>
+										<li><a href="movies.html">Kinh dị</a></li>
+										<li><a href="movies.html">Hài</a></li>
+										<li><a href="movies.html">Lãng mạn</a></li>
+										<li><a href="movies.html">Phim bộ</a></li>
+										<li><a href="movies.html">Kinh dị</a></li>
+									</ul>
+								</div>
+							</div>
+							<a class="close" href="#close">×</a>
+						</div>
+						<!-- /search popup -->
+						<!--/search-right-->
+					</div>
+					<div class="Login_SignUp" id="login"
+						style="font-size: 2rem ; display: inline-block; position: relative;">
+						<!-- <li class="nav-item"> -->
+						<a class="nav-link" href="sign_in.html"><i class="fa fa-user-circle-o"></i></a>
+						<!-- </li> -->
+					</div>
+
+				</div>
+				<!-- toggle switch for light and dark theme -->
+				<div class="mobile-position">
+					<nav class="navigation">
+						<div class="theme-switch-wrapper">
+							<label class="theme-switch" for="checkbox">
+								<input type="checkbox" id="checkbox">
+								<div class="mode-container">
+									<i class="gg-sun"></i>
+									<i class="gg-moon"></i>
+								</div>
+							</label>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</nav>
+        <!--//nav-->
+    </header>
+    <!--//header-->
+
+    <!-- breadcrumbs -->
+    <div class="w3l-breadcrumbs">
+        <nav id="breadcrumbs" class="breadcrumbs">
+            <div class="container page-wrapper">
+                <a href="index.html">Trang chủ</a> » 
+                <a href="movies.html">Phim</a> » 
+                <span class="breadcrumb_last" aria-current="page">Đặt vé</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- booking content -->
+    <section class="booking-section">
+        <div class="container py-5">
+            <!-- Movie Info Header -->
+            <div class="movie-info-header mb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <img id="movie-poster" src="" alt="Movie Poster" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-9">
+                        <h2 id="movie-title" class="mb-2">Tên phim</h2>
+                        <div class="booking-details">
+                            <p class="mb-1"><i class="fa fa-calendar"></i> <span id="show-date">Ngày chiếu</span></p>
+                            <p class="mb-1"><i class="fa fa-clock-o"></i> <span id="show-time">Giờ chiếu</span></p>
+                            <p class="mb-1"><i class="fa fa-map-marker"></i> <span id="cinema-name">Tên rạp</span></p>
+                            <p class="mb-0"><i class="fa fa-tv"></i> <span id="screen-name">Phòng chiếu 1</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Seat Map -->
+                <div class="col-lg-8">
+                    <div class="seat-map-container">
+                        <div class="screen-indicator">
+                            <div class="screen">MÀN HÌNH</div>
+                        </div>
+                        
+                        <!-- Seat Grid -->
+                        <div class="seat-grid" id="seat-grid">
+                            <!-- Seats will be generated by JavaScript -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="seat-legend">
+                            <div class="legend-item">
+                                <div class="seat-demo seat-available"></div>
+                                <span>Có thể chọn</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat-demo seat-selected"></div>
+                                <span>Đã chọn</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat-demo seat-occupied"></div>
+                                <span>Đã bán</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat-demo seat-vip"></div>
+                                <span>VIP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="col-lg-4">
+                    <div class="booking-summary">
+                        <h4>Thông tin đặt vé</h4>
+                        
+                        <div class="selected-seats-info">
+                            <h5>Ghế đã chọn</h5>
+                            <div id="selected-seats-list" class="seats-list">
+                                <p class="text-muted">Chưa chọn ghế nào</p>
+                            </div>
+                        </div>
+
+                        <div class="price-breakdown">
+                            <div class="price-item">
+                                <span>Số lượng ghế:</span>
+                                <span id="seat-count">0</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Giá vé thường:</span>
+                                <span id="normal-price">75,000đ</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Giá vé VIP:</span>
+                                <span id="vip-price">100,000đ</span>
+                            </div>
+                            <hr>
+                            <div class="price-item total">
+                                <span>Tổng cộng:</span>
+                                <span id="total-price">0đ</span>
+                            </div>
+                        </div>
+
+                        <div class="booking-actions">
+                            <button id="btn-continue" class="btn btn-primary btn-block" disabled>
+                                <i class="fa fa-credit-card"></i> Tiếp tục thanh toán
+                            </button>
+                            <button id="btn-back" class="btn btn-secondary btn-block mt-2">
+                                <i class="fa fa-arrow-left"></i> Quay lại
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="w3l-footer">
+		<section class="footer-inner-main">
+			<div class="footer-hny-grids py-5">
+				<div class="container py-lg-4">
+					<div class="text-txt">
+						<div class="right-side">
+							<div class="row footer-about">
+								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+									<a href="movies.html"><img class="img-fluid" src="assets/images/banner1.jpg"
+											alt=""></a>
+								</div>
+								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+									<a href="movies.html"><img class="img-fluid" src="assets/images/banner2.jpg"
+											alt=""></a>
+								</div>
+								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+									<a href="movies.html"><img class="img-fluid" src="assets/images/banner3.jpg"
+											alt=""></a>
+								</div>
+								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+									<a href="movies.html"><img class="img-fluid" src="assets/images/banner4.jpg"
+											alt=""></a>
+								</div>
+							</div>
+							<div class="row footer-links">
+
+
+								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+									<h6>Phim ảnh</h6>
+									<ul>
+										<li><a href="#">Phim</a></li>
+										<li><a href="#">Video</a></li>
+										<li><a href="#">Phim tiếng Anh</a></li>
+										<li><a href="#">Phù hợp với sở thích của bạn</a></li>
+										<li><a href="#">Phim sắp ra mắt</a></li>
+										<li><a href="Contact_Us.html">Liên hệ với chúng tôi</a></li>
+									</ul>
+								</div>
+								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+									<h6>Thông tin</h6>
+									<ul>
+										<li><a href="index.html">Trang chủ</a> </li>
+										<li><a href="about.html">Giới thiệu</a> </li>
+										<li><a href="#">Tv Series</a> </li>
+										<li><a href="#">Blogs</a> </li>
+										<li><a href="sign_in.html">Đăng nhập</a></li>
+										<li><a href="Contact_Us.html">Liên hệ</a></li>
+									</ul>
+								</div>
+								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+									<h6>Rạp chiếu</h6>
+									<ul>
+										<li><a href="movies.html">Châu Á</a></li>
+										<li><a href="movies.html">Pháp</a></li>
+										<li><a href="movies.html">Đài Loan</a></li>
+										<li><a href="movies.html">Hoa Kỳ</a></li>
+										<li><a href="movies.html">Hàn Quốc</a></li>
+										<li><a href="movies.html">Vương quốc Anh</a></li>
+									</ul>
+								</div>
+								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+									<h6>Tin tức & ưu đãi</h6>
+									<form action="#" class="subscribe mb-3" method="post">
+										<input type="email" name="email" placeholder="Địa chỉ email của bạn" required="">
+										<button><span class="fa fa-envelope-o"></span></button>
+									</form>
+									<p>Nhập email của bạn và nhận thông tin mới nhất, cập nhật và ưu đãi đặc biệt từ chúng tôi.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="below-section">
+				<div class="container">
+					<div class="copyright-footer">
+						<div class="columns text-lg-left">
+							<p>&copy; 2025 Nexus Net. Mọi quyền được bảo lưu</p>
+					   </div>
+
+						<!-- <ul class="social text-lg-right">
+							<li><a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+							</li>
+							<li><a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
+							</li>
+							<li><a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+							</li>
+							<li><a href="#google"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+							</li>
+
+						</ul> -->
+					</div>
+				</div>
+			</div>
+			<!-- move top -->
+			<button onclick="topFunction()" id="movetop" title="Go to top">
+				<span class="fa fa-arrow-up" aria-hidden="true"></span>
+			</button>
+			<script>
+				// When the user scrolls down 20px from the top of the document, show the button
+				window.onscroll = function () {
+					scrollFunction()
+				};
+
+				function scrollFunction() {
+					if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+						document.getElementById("movetop").style.display = "block";
+					} else {
+						document.getElementById("movetop").style.display = "none";
+					}
+				}
+
+				// When the user clicks on the button, scroll to the top of the document
+				function topFunction() {
+					document.body.scrollTop = 0;
+					document.documentElement.scrollTop = 0;
+				}
+			</script>
+			<!-- /move top -->
+
+		</section>
+	</footer>
+    <!--//footer-66 -->
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/theme-change.js"></script>
+    <script src="assets/js/owl.carousel.js"></script>
+    <script src="assets/js/easyResponsiveTabs.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    
+    <!-- Auth State Management -->
+    <script src="assets/js/auth/state.js"></script>
+    
+    <!-- Page Scripts -->
+    <script src="assets/js/seat-booking.js"></script>
+
+    <!-- Auth Functions -->
+    <!-- <script>
+        function logout() {
+            // Clear auth data
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userData');
+            
+            // Update UI
+            updateAuthState();
+            
+            // Redirect to home
+            window.location.href = 'index.html';
+        }
+
+        function updateAuthState() {
+            const authToken = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('userData');
+            const authDropdown = document.getElementById('auth-dropdown');
+            const authButtons = document.getElementById('auth-buttons');
+            const usernameDisplay = document.getElementById('username-display');
+
+            if (authToken && userData) {
+                // User is logged in
+                const user = JSON.parse(userData);
+                authDropdown.style.display = 'block';
+                authButtons.style.display = 'none';
+                usernameDisplay.textContent = user.username || user.email || 'User';
+            } else {
+                // User is not logged in
+                authDropdown.style.display = 'none';
+                authButtons.style.display = 'block';
+            }
+        }
+
+        // Initialize auth state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAuthState();
+            
+            // Check if user is logged in before allowing booking
+            const authToken = localStorage.getItem('authToken');
+            if (!authToken) {
+                // Show login prompt
+                if (confirm('Bạn cần đăng nhập để đặt vé. Chuyển đến trang đăng nhập?')) {
+                    window.location.href = 'signin.html?redirect=' + encodeURIComponent(window.location.href);
+                } else {
+                    window.location.href = 'movies.html';
+                }
+                return;
+            }
+        });
+    </script> -->
+</body>
+</html>
